@@ -32,19 +32,22 @@ const nextConfig = {
   async rewrites() {
     const backendUrl =
       process.env.BACKEND_URL ||
-      process.env.NEXT_PUBLIC_API_URL?.replace(/\/api\/?$/, '') ||
-      'http://localhost:4000';
+      process.env.NEXT_PUBLIC_API_URL?.replace(/\/api\/?$/, '');
 
-    return [
-      {
-        source: '/api/:path*',
-        destination: `${backendUrl}/api/:path*`,
-      },
-      {
-        source: '/uploads/:path*',
-        destination: `${backendUrl}/uploads/:path*`,
-      },
-    ];
+    // Only rewrite if an external backend URL is explicitly configured
+    if (backendUrl) {
+      return [
+        {
+          source: '/api/:path*',
+          destination: `${backendUrl}/api/:path*`,
+        },
+        {
+          source: '/uploads/:path*',
+          destination: `${backendUrl}/uploads/:path*`,
+        },
+      ];
+    }
+    return [];
   },
 };
 

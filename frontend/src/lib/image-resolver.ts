@@ -107,10 +107,12 @@ export function resolveImageUrl(url?: string, slugOrTitle?: string): string {
       if (cleanUrl.startsWith('http://') || cleanUrl.startsWith('https://')) {
         return cleanUrl;
       }
-      const apiOrigin = process.env.NEXT_PUBLIC_API_URL
-        ? process.env.NEXT_PUBLIC_API_URL.replace(/\/api\/?$/, '')
-        : 'http://localhost:4000';
-      return `${apiOrigin}${cleanUrl.startsWith('/') ? '' : '/'}${cleanUrl}`;
+      if (process.env.NEXT_PUBLIC_API_URL) {
+        const apiOrigin = process.env.NEXT_PUBLIC_API_URL.replace(/\/api\/?$/, '');
+        return `${apiOrigin}${cleanUrl.startsWith('/') ? '' : '/'}${cleanUrl}`;
+      }
+      // Return relative URL so it loads from the current host without hardcoded localhost
+      return cleanUrl.startsWith('/') ? cleanUrl : `/${cleanUrl}`;
     }
 
     // 0.1 Data URIs or Blob URIs (e.g. from local previews or direct file reader)

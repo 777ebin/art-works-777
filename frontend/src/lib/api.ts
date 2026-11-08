@@ -1,7 +1,23 @@
 import { ArtRecord, UserProfile } from './types';
 import { SAMPLE_ARTS } from './fallback-data';
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';
+export function getApiBase(): string {
+  if (process.env.NEXT_PUBLIC_API_URL) {
+    return process.env.NEXT_PUBLIC_API_URL.replace(/\/+$/, '');
+  }
+  // In any client browser (mobile, desktop, tablet, or deployed domain),
+  // relative '/api' calls the current website without hardcoded localhost
+  if (typeof window !== 'undefined') {
+    return '/api';
+  }
+  // Server-side on Vercel
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}/api`;
+  }
+  return 'http://127.0.0.1:3000/api';
+}
+
+const API_BASE = getApiBase();
 
 export async function fetchArts(params?: {
   search?: string;
