@@ -245,7 +245,7 @@ JWT_EXPIRATION=7d
 
 **Team Members:**
 * **Fidha Firoz** — *Project Lead*
-* **Ebin V Binu** — *Lead Full-Stack Developer & Chief Cultural Curator*
+* **Ebin V Binu** 
 
 ---
 
