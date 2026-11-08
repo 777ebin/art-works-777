@@ -1,164 +1,262 @@
-# Living Heritage, Searchable
-### A Contemporary Digital Sanctuary for Intangible Cultural Heritage
+# The Living Heritage
+### A Digital Cultural Heritage Archive
 
-> **"Every Tradition Has a Story. Every Story Deserves to Live."**
+## 1. Project Overview
 
-Living Heritage is a responsive, editorial cultural heritage archive platform that allows communities to document, preserve, organize, search, and explore traditional stories, folk songs, indigenous crafts, customs, regional art forms, and oral histories with explicit community consent, cultural ownership safeguards, and rigorous contributor attribution.
+**The Living Heritage** is a community-driven digital platform designed to preserve, document and explore cultural heritage. It provides a centralised archive for traditional art forms, folk music, crafts, rituals, oral histories and regional traditions.
 
----
+The platform allows users to contribute cultural knowledge, explore existing records and discover traditions while respecting cultural ownership, contributor attribution and consent.
 
-## 🏛️ Artistic Design & Visual Philosophy
+## 2. Problem Statement
 
-- **Digital Museum & Editorial Magazine Aesthetic**: Rich, contemporary editorial layouts with generous whitespace, delicate borders, asymmetric compositions, and high-resolution cinematic imagery.
-- **Traditional Indian Heritage Palette**:
-  - Warm parchment (`#FAF6EE`, `#FDFBF7`) and antique ivory backgrounds.
-  - Deep terracotta (`#C84B31`, `#942E19`), burnt vermillion, and turmeric yellow (`#D48806`, `#E09F3E`) accents.
-  - Earthy wood tones (`#1A0F0A`, `#2A1810`) and antique brass shimmers (`#C99E52`).
-- **Sacred Geometry & Ornamental Motifs**: Custom SVG Kolam patterns, lotus petals, temple lamps, and subtle Jali lattice overlays.
-- **Serif & Contemporary Typography**: Google Fonts *Cinzel*, *Playfair Display*, and *Plus Jakarta Sans*, paired with native *Noto Serif Malayalam* script support.
-- **Audio Experience**: Dedicated field recording audio player, lyrics summaries, and an ambient temple soundscape (flute and percussion) toggleable from the navbar.
+Traditional cultural practices, folk art, music, crafts and oral histories are gradually becoming less accessible due to modernisation and a lack of proper digital documentation. Much of this knowledge remains scattered across communities and individuals.
 
----
+The Living Heritage addresses this problem by providing a digital platform to document, organise, preserve and share cultural knowledge for future generations.
 
-## 🚀 Technology Stack
+## 3. Key Features
 
-- **Frontend**: [Next.js](https://nextjs.org/) (App Router, React 18, TypeScript, Tailwind CSS, Lucide Icons)
-- **Animations**: [Framer Motion](https://www.framer.com/motion/)
-- **Backend**: [NestJS](https://nestjs.com/) (Modular Architecture, Express, Mongoose ODM, Multer for media uploads)
-- **Database**: [MongoDB Atlas](https://www.mongodb.com/atlas)
-  - **Cluster**: `ebin007`
-  - **Database Name**: `art-works`
-  - **Collection Name**: `arts` *(All existing sample traditions and user-submitted records are stored in this exact collection)*
-- **Authentication**: JWT authentication with Role-Based Access Control (`admin`, `contributor`, `knowledge_holder`, `visitor`).
+- **Digital Cultural Archive:** Stores and displays cultural traditions and historical records.
+- **Search and Filters:** Search records by keywords, categories, regions and languages.
+- **Community Contributions:** Allows users to submit cultural stories and information.
+- **Multimedia Support:** Supports images, audio and video content.
+- **Regional Discovery:** Explore traditions based on geographical locations.
+- **Contributor Attribution:** Recognises artists and traditional knowledge holders.
+- **Consent Management:** Respects contributor permissions and cultural ownership.
+- **Admin Dashboard:** Enables administrators to review, approve and manage submissions.
+- **Responsive Design:** Accessible across desktops, tablets and mobile devices.
 
----
+## 4. Technology Stack
 
-## 📂 Project Architecture
+| Technology | Purpose |
+|---|---|
+| Next.js | Frontend development |
+| TypeScript | Type-safe development |
+| Tailwind CSS | Styling and responsive design |
+| NestJS | Backend development |
+| MongoDB Atlas | Cloud database |
+| Mongoose | Database modelling |
+| Cloudinary | Media storage |
+| Framer Motion | Animations |
+| Lucide React | Icons |
+| Vercel | Frontend deployment |
 
-```
-d:/my-projects/art-works/
-├── backend/                       # NestJS API Server
-│   ├── src/
-│   │   ├── arts/                  # Cultural Records Module
-│   │   │   ├── schemas/art.schema.ts  # Mongoose Schema targeting 'arts' collection
-│   │   │   ├── dto/               # Create, Update, Query DTOs
-│   │   │   ├── arts.service.ts    # Search, filter, approve/reject, recommendations
-│   │   │   ├── arts.controller.ts # REST API Endpoints
-│   │   │   └── arts.module.ts
-│   │   ├── auth/                  # Authentication & Role Guard Module
-│   │   │   ├── schemas/user.schema.ts
-│   │   │   ├── auth.service.ts    # Default Chief Curator seeding, JWT logic
-│   │   │   ├── auth.controller.ts
-│   │   │   └── auth.module.ts
-│   │   ├── upload/                # Multi-part Image/Audio/Video Disk Storage
-│   │   ├── seed/                  # Seed data & automatic initialization
-│   │   │   ├── seed.data.ts       # 11 authentic Kerala & Indian traditions
-│   │   │   └── seed.service.ts    # Upserts directly to 'arts' collection
-│   │   ├── app.module.ts
-│   │   └── main.ts                # Server bootstrap on PORT 4000
-│   ├── scripts/seed-atlas.js      # Direct standalone Atlas seeder
-│   ├── .env                       # Backend configuration with Atlas URI
-│   └── package.json
-│
-├── frontend/                      # Next.js Presentation Application
-│   ├── src/
-│   │   ├── app/
-│   │   │   ├── layout.tsx         # Global fonts, navbar, footer, audio bar, auth modal
-│   │   │   ├── page.tsx           # Immersive Homepage with hero & audio sampler
-│   │   │   ├── explore/page.tsx   # Searchable archive with multifaceted filtering
-│   │   │   ├── story/[slug]/page.tsx # Detailed storytelling, audio/video players
-│   │   │   ├── contribute/page.tsx # Multi-step submission portal & consent covenant
-│   │   │   ├── community/page.tsx # Knowledge holders, elders & contributor directory
-│   │   │   ├── admin/page.tsx     # Curator review queue, approve/reject workflow
-│   │   │   ├── about/page.tsx     # Platform mission, anti-extractive philosophy
-│   │   │   └── globals.css        # Heritage theme styling & Jali backgrounds
-│   │   ├── components/            # Reusable UI components
-│   │   │   ├── Navbar.tsx
-│   │   │   ├── Footer.tsx
-│   │   │   ├── CulturalCard.tsx
-│   │   │   ├── GlobalAudioBar.tsx
-│   │   │   ├── AuthModal.tsx
-│   │   │   └── OrnamentalMotif.tsx
-│   │   ├── context/               # AuthContext & AudioContext
-│   │   └── lib/                   # API clients & TypeScript types
-│   ├── .env.local                 # Next.js API URL configuration
-│   └── package.json
-│
-└── package.json                   # Root workspace scripts
+## 5. System Architecture
+
+The application follows a full-stack architecture.
+
+**Frontend:**
+- Developed using Next.js and TypeScript.
+- Provides the user interface and interactive features.
+- Communicates with the backend through REST APIs.
+
+**Backend:**
+- Developed using NestJS.
+- Handles authentication, data processing and API requests.
+- Manages cultural record submissions and administrative operations.
+
+**Database:**
+- MongoDB Atlas stores cultural records, metadata and user information.
+- Mongoose manages database schemas and operations.
+
+**Media Storage:**
+- Cloudinary manages uploaded images and multimedia content.
+
+### Application Flow
+
+```text
+        USER
+          |
+          v
+    NEXT.JS FRONTEND
+          |
+          v
+     NESTJS BACKEND
+          |
+     +----+------+
+     |           |
+     v           v
+  MONGODB     CLOUDINARY
+   ATLAS       STORAGE
+     |           |
+     +-----+-----+
+           |
+           v
+     DISPLAY RESULTS
+       TO THE USER
 ```
 
----
+## 6. Installation & Setup Instructions
 
-## 📦 Cultural Records Seeded in MongoDB Atlas (`art-works.arts`)
+### Prerequisites
 
-The collection is pre-populated with 11 deeply researched traditions with metadata, regional information, audio tracks, and credible archival sources:
+Install the following before starting:
 
-1. **Theyyam: The Living Gods of Malabar** (*Ritual Dance Drama, North Malabar*)
-2. **Aranmula Kannadi: The Sacred Metal Mirrors of Travancore** (*Sacred Metallurgy Craft, Pathanamthitta*)
-3. **Ottanthullal: The Satirical Dance of Kunjan Nambiar** (*Solo Theatre & Satire, Ambalappuzha*)
-4. **Vadakkan Pattukal: The Northern Heroic Ballads** (*Oral Epics & Ballads of Unniyarcha, Kadathanad*)
-5. **Chendamelam: The Thunderous Percussion Symphony** (*Temple Percussion, Thrissur*)
-6. **Kalaripayattu: The Ancient Mother of Martial Arts** (*Combat & Marma Healing, Northern Kerala*)
-7. **Kerala Mural Painting: The Sacred Pigment Frescoes** (*Natural Mineral Art, Mattancherry & Guruvayur*)
-8. **Kathakali: The Classical Dance-Drama of Epic Splendor** (*Classical Mudra Theatre, Kalamandalam*)
-9. **Pulikali: The Tiger Dance of Thrissur Onam** (*Folk Street Carnival, Swaraj Round*)
-10. **Nettur Petti: The Traditional Jewel Casket of Kerala Royalty** (*Sacred Timber Joinery, Thalassery*)
-11. **Maravuri & Kani Tribal Oral Herbal Lore** (*Indigenous Ethnobotany & Forest Bark Textiles, Agasthyamala*)
+- Node.js and npm
+- Git
+- MongoDB Atlas account
+- Cloudinary account
 
----
+### Step 1: Clone the Repository
 
-## 🔑 Administrative Credentials (Chief Cultural Curator)
+```bash
+git clone <repository-url>
+cd living-heritage
+```
 
-For evaluation and testing of the protected curation dashboard:
-- **Email**: `admin@livingheritage.org`
-- **Password**: `curator123`
-- *Or click the "Authorize as Chief Curator" one-click button on the Admin page (`/admin`) or Sign In modal.*
+### Step 2: Install Backend Dependencies
 
----
+```bash
+cd backend
+npm install
+```
 
-## 🛠️ Local Development & Running the Application
+### Step 3: Install Frontend Dependencies
 
-### 1. Start the NestJS Backend
+Open another terminal:
+
+```bash
+cd frontend
+npm install
+```
+
+### Step 4: Configure Environment Variables
+
+Create `.env` files in the respective frontend and backend directories.
+
+Add the required configuration values.
+
+### Step 5: Start the Backend
+
 ```bash
 cd backend
 npm run start:dev
 ```
-*The backend connects to MongoDB Atlas at cluster `ebin007` (database `art-works`, collection `arts`) and listens on `http://localhost:4000/api`.*
 
-### 2. Start the Next.js Frontend
-In a separate terminal:
+### Step 6: Start the Frontend
+
 ```bash
 cd frontend
 npm run dev
 ```
-*The frontend will be available at `http://localhost:3000`.*
 
-### 3. Re-seed MongoDB Atlas Collection (Optional)
-To verify or reset the 11 sample traditions in the `arts` collection:
-```bash
-npm run seed
+### Step 7: Open the Website
+
+Visit:
+
+```text
+http://localhost:3000
 ```
+
+The backend should run on its configured port.
+
+## 7. Environment Variables
+
+### Backend (.env)
+
+```env
+PORT=3001
+
+MONGODB_URI=your_mongodb_atlas_connection_string
+
+CLOUDINARY_CLOUD_NAME=your_cloudinary_name
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+
+JWT_SECRET=your_secure_jwt_secret
+```
+
+### Frontend (.env.local)
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:3001
+```
+
+**Note:** These are example variable names. Match them with the actual configuration used in your application. Never upload real credentials or secret keys to GitHub.
+
+## 8. Usage Instructions
+
+1. Open the website through the browser.
+2. Explore cultural records available in the digital archive.
+3. Use search and filters to discover specific traditions.
+4. Open individual records to view their cultural information and multimedia.
+5. Use the contribution portal to submit new cultural records.
+6. Provide the required metadata and consent information.
+7. Administrators can review submissions through the admin dashboard.
+8. Approved records become available in the public archive according to their permissions.
+
+## 9. Demonstration Screenshots
+
+Add screenshots of the actual application in this section.
+
+Suggested screenshots:
+
+| Screenshot | Description |
+|---|---|
+| Homepage | Main landing page |
+| Explore Archive | Cultural records and search |
+| Story Details | Individual cultural record |
+| Contribution Page | Cultural submission form |
+| Admin Dashboard | Submission management |
+| Mobile View | Responsive interface |
+
+Place screenshots inside a `screenshots` folder in the repository.
+
+Example:
+
+```markdown
+![Homepage](screenshots/homepage.png)
+
+![Explore Archive](screenshots/explore.png)
+
+![Contribution Page](screenshots/contribute.png)
+
+![Admin Dashboard](screenshots/admin.png)
+```
+
+## 10. Team Members
+
+**Project:** The Living Heritage
+
+**Event:** ART//CODE 2026
+
+Team Members:
+
+- Fidha Firoz (leader)
+- Ebin V Binu
+
+
+Replace the placeholders with your actual team members and their roles.
+
+## 11. Limitations & Future Scope
+
+### Current Limitations
+
+- The archive depends on the accuracy of submitted information.
+- Some cultural traditions may be difficult to document and verify.
+- Sensitive cultural knowledge requires careful consent and moderation.
+- Multimedia storage and hosting may involve additional costs.
+- Initial cultural coverage may be limited to selected regions.
+
+### Future Scope
+
+- Expand the archive to cover more regions and cultures.
+- Introduce multilingual support.
+- Develop interactive cultural maps.
+- Add advanced search and recommendation features.
+- Collaborate with cultural organisations and knowledge holders.
+- Improve digital preservation and community participation.
+
+## 12. License & Attribution
+
+This project is developed as part of **ART//CODE 2026** to promote cultural preservation through technology.
+
+- Cultural content belongs to its respective creators and communities.
+- Appropriate attribution and permissions must be maintained.
+- Third-party images, libraries and resources remain subject to their respective licenses.
+- The project's source-code license should be specified by the development team before public distribution.
 
 ---
 
-## 🌐 Public Deployment Guide
+**Living Heritage, Searchable**
 
-### Deploying the Backend (NestJS)
-1. **Host on Railway / Render / DigitalOcean App Platform**:
-   - Set Root Directory: `backend`
-   - Build Command: `npm run build`
-   - Start Command: `npm run start:prod`
-   - Set Environment Variables:
-     - `PORT=4000`
-     - `MONGODB_URI=mongodb+srv://ebinbinuff_db_user:ebinaldo777@ebin007.bql4m4e.mongodb.net/art-works?retryWrites=true&w=majority`
-     - `DB_NAME=art-works`
-     - `COLLECTION_NAME=arts`
-     - `JWT_SECRET=your_production_secret_key`
-
-### Deploying the Frontend (Next.js)
-1. **Host on Vercel**:
-   - Set Root Directory: `frontend`
-   - Set Environment Variables:
-     - `NEXT_PUBLIC_API_URL=https://your-backend-domain.com/api`
-   - Click **Deploy**. Vercel will build and host the responsive museum experience.
-
+*Preserving traditions. Connecting generations. Keeping culture alive.*
