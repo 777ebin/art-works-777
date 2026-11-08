@@ -24,3 +24,4 @@ export async function connectToDatabase(): Promise<{ client: MongoClient; db: Db
   cachedDb = db;
   return { client, db };
 }
+

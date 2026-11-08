@@ -20,3 +20,4 @@ export async function POST(req: Request, { params }: { params: { slug: string } 
     return NextResponse.json({ likes: 1 });
   }
 }
+

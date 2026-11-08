@@ -27,3 +27,4 @@ export async function GET() {
   const artForms = Array.from(new Set(SAMPLE_ARTS.map((a) => a.artForm)));
   return NextResponse.json({ categories, regions, languages, artForms });
 }
+

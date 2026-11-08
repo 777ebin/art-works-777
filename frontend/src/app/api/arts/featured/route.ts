@@ -20,3 +20,4 @@ export async function GET() {
 
   return NextResponse.json(SAMPLE_ARTS.filter((a) => a.featured).slice(0, 6));
 }
+

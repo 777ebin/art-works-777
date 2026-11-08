@@ -26,3 +26,4 @@ export async function GET(req: Request, { params }: { params: { slug: string } }
     SAMPLE_ARTS.filter((a) => a.slug !== slug).slice(0, 3),
   );
 }
+
