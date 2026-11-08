@@ -3,6 +3,9 @@ import { connectToDatabase } from '@/lib/db';
 import { SAMPLE_ARTS } from '@/lib/fallback-data';
 import jwt from 'jsonwebtoken';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 const JWT_SECRET = process.env.JWT_SECRET || 'living_heritage_sacred_secret_key_2026_ebin';
 
 function extractUser(req: Request) {

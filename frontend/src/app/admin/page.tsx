@@ -44,16 +44,45 @@ export default function AdminDashboardPage() {
   const loadAdminData = async () => {
     setLoading(true);
     try {
-      const [artsRes, statsRes] = await Promise.all([
+      const [artsRes, statsRes, pendingRes] = await Promise.all([
         fetchArts({
           status: statusFilter,
           limit: 100,
           token: token || undefined,
         }),
         fetchStats().catch(() => null),
+        fetchArts({
+          status: 'pending_review',
+          limit: 100,
+          token: token || undefined,
+        }).catch(() => ({ items: [], total: 0 })),
       ]);
+
       setRecords(artsRes.items);
-      setStats(statsRes);
+
+      // Compute live pending count from both stats and actual pending query
+      const actualPendingInTable = artsRes.items.filter(
+        (r) => r.status === 'pending_review',
+      ).length;
+      const actualPendingFromQuery = pendingRes?.total || pendingRes?.items?.length || 0;
+      const computedPending = Math.max(
+        statsRes?.pending || 0,
+        actualPendingFromQuery,
+        actualPendingInTable,
+      );
+
+      const computedTotal = Math.max(statsRes?.total || 0, artsRes.items.length);
+      const computedApproved =
+        statsRes?.approved !== undefined && statsRes?.approved > 0
+          ? statsRes.approved
+          : artsRes.items.filter((r) => r.status === 'approved').length;
+
+      setStats({
+        ...statsRes,
+        pending: computedPending,
+        total: computedTotal,
+        approved: computedApproved,
+      });
     } catch (err) {
       console.error('Failed to load admin data:', err);
     } finally {
@@ -243,21 +272,34 @@ export default function AdminDashboardPage() {
         {/* Status Pills */}
         <div className="flex items-center gap-2 flex-wrap w-full sm:w-auto">
           {[
-            { label: 'All Records', value: 'all' },
-            { label: 'Pending Review', value: 'pending_review' },
-            { label: 'Approved', value: 'approved' },
-            { label: 'Rejected', value: 'rejected' },
+            { label: 'All Records', value: 'all', count: stats?.total },
+            { label: 'Pending Review', value: 'pending_review', count: stats?.pending },
+            { label: 'Approved', value: 'approved', count: stats?.approved },
+            { label: 'Rejected', value: 'rejected', count: stats?.rejected },
           ].map((tab) => (
             <button
               key={tab.value}
               onClick={() => setStatusFilter(tab.value)}
-              className={`px-3.5 py-1.5 rounded text-xs font-serif transition-all ${
+              className={`px-3.5 py-1.5 rounded text-xs font-serif transition-all flex items-center gap-1.5 ${
                 statusFilter === tab.value
                   ? 'bg-terracotta-600 text-white font-semibold shadow-sm'
                   : 'bg-parchment-50 border border-parchment-300 text-earth-700 hover:border-terracotta-500'
               }`}
             >
-              {tab.label}
+              <span>{tab.label}</span>
+              {tab.count !== undefined && tab.count > 0 && (
+                <span
+                  className={`px-1.5 py-0.5 rounded-full text-[10px] font-mono leading-none ${
+                    statusFilter === tab.value
+                      ? 'bg-white/20 text-white'
+                      : tab.value === 'pending_review'
+                      ? 'bg-amber-200 text-amber-900 font-bold'
+                      : 'bg-parchment-200 text-earth-700'
+                  }`}
+                >
+                  {tab.count}
+                </span>
+              )}
             </button>
           ))}
         </div>

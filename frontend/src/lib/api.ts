@@ -156,7 +156,13 @@ export async function fetchStats(): Promise<{
   regions: { _id: string; count: number }[];
 }> {
   try {
-    const res = await fetch(`${API_BASE}/arts/stats`, { cache: 'no-store' });
+    const res = await fetch(`${API_BASE}/arts/stats?_t=${Date.now()}`, {
+      cache: 'no-store',
+      headers: {
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        Pragma: 'no-cache',
+      },
+    });
     if (res.ok) return await res.json();
   } catch (err) {
     // fallback
