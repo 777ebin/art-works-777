@@ -1,11 +1,14 @@
-# Living Heritage, Searchable
-> *A Contemporary Digital Museum & Living Archive for Intangible Cultural Heritage*
+# The Living Heritage
+> *A Digital Cultural Heritage Archive & Living Museum*
+
+**Event:** ART//CODE 2026  
+**Repository:** [https://github.com/777ebin/art-works-777](https://github.com/777ebin/art-works-777)
 
 ---
 
 ## 1. Project Overview
 
-**Living Heritage, Searchable** is a full-stack, responsive digital sanctuary and cultural preservation platform designed to document, safeguard, celebrate, and explore traditional stories, folk songs, indigenous crafts, ritual performing arts, and oral histories of Kerala and India.
+**The Living Heritage** is a full-stack, community-driven digital preservation platform and living cultural museum designed to document, safeguard, and explore traditional stories, folk songs, indigenous crafts, ritual performing arts, and oral histories of Kerala and India.
 
 Blending the aesthetic depth of a **contemporary digital museum** and an **editorial magazine** with **traditional Indian aesthetics**, the platform emphasizes ethical preservation. It departs from extractive documentation by establishing strict community ownership, hereditary knowledge holder attribution, and prior informed consent (PIC) protocols.
 
@@ -26,38 +29,22 @@ The platform is pre-populated with 11 deeply researched living traditions:
 
 ## 2. Problem Statement
 
-Intangible Cultural Heritage (ICH) across indigenous and regional communities faces unprecedented threats:
-1. **Generational Disruption & Erosion**: Rapid modernization and urban migration are severing the oral transmission of ancestral lore from master practitioners to younger generations.
-2. **Extractive & Unattributed Documentation**: Mainstream digital archives and social media platforms frequently appropriate traditional cultural expressions without crediting hereditary masters, lineages, or native communities.
-3. **Absence of Consent & Privacy Gating**: Sacred rituals, esoteric chants, and sensitive indigenous ecological lore are often uploaded indiscriminately without community consent, leading to commercial exploitation and spiritual desecration.
-4. **Poor Digital Experience**: Existing cultural repositories often resemble dated government databases with fragmented search, uninspired aesthetics, and unreliable media hosting.
+Traditional cultural practices, folk art, music, crafts, and oral histories are gradually becoming less accessible due to rapid modernization, urban migration, and a lack of proper digital documentation. Much of this knowledge remains scattered across communities and fragile oral lineages.
 
-**Living Heritage, Searchable** bridges this divide by delivering a museum-grade user experience backed by strict cultural governance and data ethics.
+Furthermore, mainstream digital platforms frequently extract and commercialize traditional lore without crediting hereditary masters or respecting sacred boundaries. **The Living Heritage** addresses this by providing a digital sanctuary to document, organize, preserve, and celebrate cultural knowledge with explicit consent, transparent attribution, and role-based curation.
 
 ---
 
 ## 3. Key Features
 
-* **Museum & Editorial Design Philosophy**:
-  * Handcrafted aesthetic featuring warm parchment (`#FAF6EE`), antique ivory, deep terracotta, turmeric yellow, and rich wood tones.
-  * Google Fonts typography pairing (*Cinzel*, *Playfair Display*, *Noto Serif Malayalam*, and *Plus Jakarta Sans*).
-  * Custom traditional SVG ornamental flourishes (temple lotus borders, sacred seals, and Kolam geometric motifs).
-* **Searchable & Faceted Archive Exploration**:
-  * Real-time search across titles, native scripts, descriptions, and regions.
-  * Multi-dimensional filtering by Category, Geographic Region, Language, and Art Form.
-* **In-Depth Cultural Story Chronicles**:
-  * Detailed narratives encompassing historical background, cultural significance, origin sources, and living guardian quotes.
-  * Curated, high-resolution photography with verifiable source references.
-* **Persistent Ambient Audio Player**:
-  * Embedded field audio soundscapes and temple percussion accessible across pages via a global floating audio bar.
-* **Community Contribution Portal with Ethical Consent Covenant**:
-  * Multi-step submission wizard enabling community custodians to record narratives, attach media, and credit living masters.
-  * Mandatory **Prior Informed Consent (PIC)** affirmation and sensitive lore flags preventing unapproved commercial access.
-* **Protected Chief Curator Governance Queue (`/admin`)**:
-  * Role-Based Access Control (RBAC) interface for evaluating pending submissions.
-  * Side-by-side photographic preview, metadata verification, review notes, and single-click Approve / Reject actions.
-* **Zero-Downtime Fallback Architecture**:
-  * Automatic synchronization with MongoDB Atlas, backed by client-side fallback resolvers ensuring seamless browsing even during cold starts.
+* **Digital Cultural Archive**: Stores, organizes, and showcases cultural traditions with historical context and multimedia.
+* **Search and Multifaceted Filters**: Real-time search across titles, native Malayalam scripts, descriptions, and regions with filters for Category, Region, and Art Form.
+* **Community Contributions & Consent**: Multi-step submission portal allowing community custodians to submit stories, images, and audio with mandatory Prior Informed Consent (PIC).
+* **Multimedia Support**: Native support for high-resolution archival photography, field audio soundscapes, and living documentation.
+* **Contributor Attribution**: Explicit recognition of hereditary artists, master practitioners, and traditional knowledge holders.
+* **Admin & Curator Dashboard**: Protected governance interface (`/admin`) for evaluating, reviewing, approving, and rejecting submissions.
+* **Museum Editorial Aesthetics**: Handcrafted design with warm parchment (`#FAF6EE`), antique ivory, deep terracotta, turmeric accents, and traditional Indian ornamental motifs.
+* **Responsive Design**: Fully responsive across mobile, tablet, and desktop devices without breaking on external networks.
 
 ---
 
@@ -71,16 +58,15 @@ Intangible Cultural Heritage (ICH) across indigenous and regional communities fa
 * **Icons**: [Lucide React](https://lucide.dev/)
 * **Audio**: HTML5 Web Audio API with React Context State Management
 
-### Backend
-* **Framework**: [NestJS 10](https://nestjs.com/) (Modular Architecture, Dependency Injection)
-* **Runtime / Engine**: [Node.js](https://nodejs.org/) & [Express.js](https://expressjs.com/)
+### Backend & API
+* **Full-Stack Serverless Routes**: Next.js 14 App Router API Route Handlers (`/api/arts`, `/api/auth`, `/api/upload`)
+* **Standalone Backend**: [NestJS 10](https://nestjs.com/) (Modular Architecture, Express)
 * **Validation**: [Class Validator](https://github.com/typestack/class-validator) & [Class Transformer](https://github.com/typestack/class-transformer)
-* **File Uploads**: [Multer](https://github.com/expressjs/multer) disk storage engine
 
 ### Database & Security
-* **Database**: [MongoDB Atlas](https://www.mongodb.com/atlas) (Cluster: `ebin007`, Database: `art-works`, Collection: `arts` and `users`)
-* **ODM**: [Mongoose 8](https://mongoosejs.com/)
-* **Authentication**: [JSON Web Tokens (JWT)](https://jwt.io/) (`@nestjs/jwt`) & [Bcrypt.js](https://github.com/dcodeIO/bcrypt.js)
+* **Database**: [MongoDB Atlas](https://www.mongodb.com/atlas) (Cluster: `ebin007`, Database: `art-works`, Collections: `arts`, `users`)
+* **ODM / Driver**: Official MongoDB Node.js Client & [Mongoose 8](https://mongoosejs.com/)
+* **Authentication**: [JSON Web Tokens (JWT)](https://jwt.io/) & [Bcrypt.js](https://github.com/dcodeIO/bcrypt.js)
 * **Access Control**: Role-Based Access Control (RBAC) supporting `visitor`, `contributor`, `knowledge_holder`, and `curator` / `admin`
 
 ### Deployment & Tooling
@@ -92,13 +78,13 @@ Intangible Cultural Heritage (ICH) across indigenous and regional communities fa
 
 ## 5. System Architecture
 
-```
+```text
                                   +---------------------------------------+
                                   |         CLIENT BROWSER / USER         |
                                   |  (Desktop, Tablet, Mobile Responsive) |
                                   +-------------------+-------------------+
                                                       |
-                                                      | HTTPS / WSS
+                                                      | HTTPS / Dynamic
                                                       v
                                   +---------------------------------------+
                                   |          VERCEL EDGE NETWORK          |
@@ -112,7 +98,7 @@ Intangible Cultural Heritage (ICH) across indigenous and regional communities fa
          |     FRONTEND PAGES & STATE    |                         |    IMAGE & FALLBACK RESOLVER  |
          |  - / (Homepage & Hero)        |                         |  - High-res CDN Image Mapper  |
          |  - /explore (Search & Filter) |                         |  - Local Seed Data Fallback   |
-         |  - /story/[slug] (Details)    |                         |  - Direct Static Asset Links  |
+         |  - /story/[slug] (Details)    |                         |  - Direct Cross-Device Assets |
          |  - /contribute (Multi-step)   |                         +-------------------------------+
          |  - /admin (Curator Queue)     |
          |  - AudioContext & AuthContext |
@@ -121,13 +107,14 @@ Intangible Cultural Heritage (ICH) across indigenous and regional communities fa
                          | REST API Requests (/api/arts, /api/auth, /api/upload)
                          v
          +-------------------------------+
-         |     NESTJS BACKEND ENGINE     |
-         |  - ArtsController / Service   |
-         |  - AuthController / JWT Guard |
-         |  - UploadController (Multer)  |
+         |   SERVERLESS NEXT.JS API /    |
+         |       NESTJS BACKEND          |
+         |  - Arts Service & Curation    |
+         |  - Auth & JWT Verification    |
+         |  - Media Upload Processing    |
          +---------------+---------------+
                          |
-                         | Mongoose ODM Protocol (TLS/SSL)
+                         | MongoDB Protocol (TLS/SSL Connection Pooling)
                          v
          +-------------------------------+
          |      MONGODB ATLAS CLOUD      |
@@ -153,15 +140,15 @@ git clone https://github.com/777ebin/art-works-777.git
 cd art-works-777
 ```
 
-### Step 2: Install Backend Dependencies
+### Step 2: Install Frontend Dependencies
 ```bash
-cd backend
+cd frontend
 npm install
 ```
 
-### Step 3: Install Frontend Dependencies
+### Step 3: Install Backend Dependencies (Optional for standalone backend)
 ```bash
-cd ../frontend
+cd ../backend
 npm install
 ```
 
@@ -173,19 +160,9 @@ npm run build
 node scripts/seed-atlas.js
 ```
 
-### Step 5: Start the Development Servers
-In two separate terminals:
-
-**Terminal 1 (Backend):**
+### Step 5: Start the Development Server
 ```bash
-cd backend
-npm run start:dev
-```
-*Backend runs on `http://localhost:4000/api`.*
-
-**Terminal 2 (Frontend):**
-```bash
-cd frontend
+cd ../frontend
 npm run dev
 ```
 *Frontend runs on `http://localhost:3000`.*
@@ -194,32 +171,29 @@ npm run dev
 
 ## 7. Environment Variables
 
-### Backend Configuration (`backend/.env`)
-Create a `.env` file in the `backend/` directory:
-
-```ini
-# Server Port
-PORT=4000
-
-# MongoDB Atlas Connection
-MONGODB_URI=mongodb+srv://ebinbinuff_db_user:ebinaldo777@ebin007.bql4m4e.mongodb.net/art-works?retryWrites=true&w=majority
-DB_NAME=art-works
-COLLECTION_NAME=arts
-
-# JWT Security
-JWT_SECRET=living_heritage_sacred_secret_key_2026_ebin
-JWT_EXPIRATION=7d
-```
-
 ### Frontend Configuration (`frontend/.env.local`)
 Create a `.env.local` file in the `frontend/` directory:
 
 ```ini
-# Backend API Base URL
-NEXT_PUBLIC_API_URL=http://localhost:4000/api
+# When empty or omitted, relative '/api' is used automatically across all devices
+NEXT_PUBLIC_API_URL=
 
-# Production Backend Override (used when deployed)
-# NEXT_PUBLIC_API_URL=https://your-backend-service.onrender.com/api
+# MongoDB Atlas Cloud Database
+MONGODB_URI=mongodb+srv://ebinbinuff_db_user:ebinaldo777@ebin007.bql4m4e.mongodb.net/art-works?retryWrites=true&w=majority
+DB_NAME=art-works
+
+# JWT Authentication
+JWT_SECRET=living_heritage_sacred_secret_key_2026_ebin
+```
+
+### Backend Configuration (`backend/.env` - Optional)
+```ini
+PORT=4000
+MONGODB_URI=mongodb+srv://ebinbinuff_db_user:ebinaldo777@ebin007.bql4m4e.mongodb.net/art-works?retryWrites=true&w=majority
+DB_NAME=art-works
+COLLECTION_NAME=arts
+JWT_SECRET=living_heritage_sacred_secret_key_2026_ebin
+JWT_EXPIRATION=7d
 ```
 
 ---
@@ -227,7 +201,7 @@ NEXT_PUBLIC_API_URL=http://localhost:4000/api
 ## 8. Usage Instructions
 
 ### 1. Exploring the Living Archive
-* Visit `http://localhost:3000` to browse the hero showcase, featured traditions, and soundscape previews.
+* Visit `http://localhost:3000` or your deployed Vercel domain to browse the hero showcase, featured traditions, and soundscape previews.
 * Navigate to **Explore Archive** (`/explore`) to execute search queries (e.g., *"Theyyam"*, *"Kannur"*, *"Mirror"*), or filter by Art Form, Region, or Language.
 * Click any tradition card to view its in-depth chronicle, living master quotes, and archival photographic documentation.
 
@@ -260,24 +234,27 @@ NEXT_PUBLIC_API_URL=http://localhost:4000/api
 | **Contribution & Consent Portal** | Step-by-step guardian submission wizard with photographic media preview and legal Prior Informed Consent agreement. |
 | **Curator Review Queue (`/admin`)** | Protected governance dashboard displaying KPI counters, photographic inspection drawer, and approval triggers. |
 
-*(Screenshots can be captured and placed under `/docs/screenshots/`)*
+*(Place screenshots inside a `screenshots/` directory if required)*
 
 ---
 
 ## 10. Team Members
 
-* **Ebin** — *Lead Full-Stack Architect, Creative Director & Chief Cultural Curator*
-  * Architecture, NestJS API design, Next.js frontend implementation, MongoDB Atlas integration, and cultural preservation curation.
-* **Living Heritage Collective** — *Folklore Research, Ethnographic Documentation & Community Guardians*
+**Project:** The Living Heritage  
+**Event:** ART//CODE 2026  
+
+**Team Members:**
+* **Fidha Firoz** — *Project Lead*
+* **Ebin V Binu** — *Lead Full-Stack Developer & Chief Cultural Curator*
 
 ---
 
 ## 11. Limitations & Future Scope
 
 ### Current Limitations
-1. **Local Media Upload Storage**: Uploaded files in local development are saved to `./uploads`. In serverless deployments, an external object store (e.g., AWS S3 / Cloudinary) is recommended.
+1. **Cloud Media Storage**: Heavy media files are handled via direct base64 / external CDN URLs; integrating dedicated Amazon S3 / Cloudinary buckets is planned for ultra-high-resolution RAW scans.
 2. **Manual Curation Bottleneck**: Verification relies on human curators checking hereditary claims and community permissions.
-3. **Bandwidth for High-Res Imagery**: Uncompressed archival photographs can require significant bandwidth on slow mobile connections.
+3. **Regional Focus**: Initial cultural coverage focuses primarily on South India and Kerala traditions.
 
 ### Future Scope
 * **AI-Assisted Folklore Audio Transcription**: Integration of Malayalam and Dravidian dialect speech-to-text models for transcribing oral chants.
@@ -289,8 +266,10 @@ NEXT_PUBLIC_API_URL=http://localhost:4000/api
 
 ## 12. License & Attribution
 
+This project is developed as part of **ART//CODE 2026** to promote cultural preservation through technology.
+
 ### Software License
-The codebase of **Living Heritage, Searchable** is licensed under the [MIT License](LICENSE).
+The codebase of **The Living Heritage** is licensed under the [MIT License](LICENSE).
 
 ### Cultural Attribution & Traditional Knowledge Notice
 The traditional expressions, songs, practices, and folklore documented within this archive belong perpetually to their respective hereditary custodian communities, clans, and master artists. Documentation is compiled solely for educational, cultural preservation, and non-commercial archival purposes in alignment with UNESCO conventions on the Safeguarding of the Intangible Cultural Heritage.
